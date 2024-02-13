@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+    <h1>USERS</h1>
+
+    {% for user in users %}
+    <h4>{{user.first_name}} {{user.last_name}} [{{user}}]</h4>
+    {% endfor %}
+   <h1>THIS IS HTML DOCUMENT</h1> 
+   <p>{{data}}</p>
+
+   
+    {% comment %}
+       <h2>This is comment</h2>
+    {% endcomment %}
+
+
+   <h1>List of Persons</h1>
+
+   {% for person in person_list %}
+
+
+    {% if person == "RAM" %}
+
+    <p style="background-color: green; color:white;">{{person}}</p>
+    
+    {% else %}
+
+    <p>{{person}}</p>
+
+    {% endif %}
+   
+   
+
+   {% endfor %}
+
+
+   <h1>NEXT PERSON LIST</h1>
+
+   {% for person in next_person_list %}
+
+    <h2>USERNAME - {{person.username}}</h2>
+    <h3>ADDRESS -  {{person.address}}</h3>
+    <p>JOB - {{person.job}}</p>
+    <hr>
+   {% endfor %}
+
+  
+</body>
+</html>
