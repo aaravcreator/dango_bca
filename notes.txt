@@ -1,0 +1,6 @@
+- Making a Django App
+- Project Urls and App Urls mapping
+- Making Django Models
+- Making MigrationFiles and Running Migrarations
+- List View 
+

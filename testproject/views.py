@@ -70,3 +70,24 @@ def square(request,number):
 def multiply(request,num1,num2):
     result = num1*num2
     return HttpResponse(f"The product of {num1} and {num2} is {result}")
+
+
+def register(request):
+    # username = request.GET.get('username')
+    # full_name = request.GET.get('full_name')
+    data = None
+    if request.method == "POST":
+        username = request.POST.get('username')
+        full_name = request.POST.get('full_name')
+        # object created and inserted to database
+        
+        if (username is not None and username != "" ):
+            data = f"Your username is {username}"
+        else :
+            data = f"You haven't entered username"
+
+    
+    context = {
+        'data':data,
+    }
+    return render(request,'register.html',context)

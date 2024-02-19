@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1>Registration</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input id="username" type="text" name="username" placeholder="Enter your username">
+
+    <label for="full_name">Full Name</label>
+    <input type="text" name="full_name" placeholder="Enter your Full Name">
+
+    <button type="submit">Register</button>
+
+
+    <p>{{data}}</p>
+</form>
+
+
+</body>
+</html>
