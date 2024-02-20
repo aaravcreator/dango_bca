@@ -1,11 +1,26 @@
 
 {% extends 'base.html' %}
 
+{% block title %}
+List Todos
+{% endblock title %}
 
 {% block content %}
 
-<a href="{% url 'create_todo' %}">Add TODO</a>
+<a class="btn btn-primary" href="{% url 'create_todo' %}"><i class="fa-solid fa-plus"></i> Add TODO </a>
 <h1>LIST OF TODOS</h1>
+<form action="">
+
+    {{todo_search_form}}
+
+    <button type="submit">Search</button>
+</form>
+
+<!-- <form action="" >
+    <label for="keyword">Search</label>
+    <input id="keyword" type="text" name="keyword" placeholder="Enter keyword to search..">
+    <button type="submit">Search</button>
+</form> -->
 
 <p>COMPLETED: <strong>{{completed_todos_count}}</strong></p>
 <p>INCOMPLETE: <strong>{{incomplete_todos_count}}</strong></p>
@@ -19,8 +34,8 @@
     <p> {{todo}}</p>
     {% endif %}
 
-    <a class="btn btn-warning" href="{% url 'edit_todo' todo.id %}">EDIT</a>
-    <a class="btn btn-danger" href="{% url 'delete_todo' todo.id %}">DELETE</a>
+    <a class="btn btn-warning" href="{% url 'edit_todo' todo.id %}"><i class="fa-solid fa-pen-to-square"></i>EDIT</a>
+    <a class="btn btn-danger" href="{% url 'delete_todo' todo.id %}"><i class="fa-solid fa-trash "></i>DELETE</a>
 
 <hr>
 {% endfor %}

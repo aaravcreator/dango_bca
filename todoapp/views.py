@@ -1,16 +1,22 @@
 from django.shortcuts import render,HttpResponse,redirect
 from .models import Todo
-from .forms import TodoForm
+from .forms import TodoForm,TodoSearchForm
 # Create your views here.
 def todo_index(request):
     return HttpResponse("THIS IS TODO INDEX")
 
 def list_todo(request):
-    todos = Todo.objects.all()
+    todo_search_form = TodoSearchForm()
+    keyword = request.GET.get('title')
+    if keyword is not None and keyword != "":
+        todos = Todo.objects.filter(title__exact = keyword)
+    else:
+        todos = Todo.objects.all()
     completed_todos_count = Todo.objects.filter(completed_status=True).count()
     incomplete_todos_count = Todo.objects.filter(completed_status=False).count()
     print(todos)
     context = {
+        'todo_search_form':todo_search_form,
         'todo_list':todos,
         'completed_todos_count':completed_todos_count,
         'incomplete_todos_count':incomplete_todos_count

@@ -11,6 +11,9 @@
     <script src="{% static 'js/main.js' %}"></script>
 </head>
 <body>
+
+    <a class="btn btn-primary"  href="{% url 'list_todo' %}">TODO APP</a>
+
     <h1>USERS</h1>
 
     {% for user in users %}
