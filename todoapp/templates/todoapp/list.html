@@ -7,6 +7,7 @@ List Todos
 
 {% block content %}
 
+<h2>HELLO, {{request.user}}</h2>
 <a class="btn btn-primary" href="{% url 'create_todo' %}"><i class="fa-solid fa-plus"></i> Add TODO </a>
 <h1>LIST OF TODOS</h1>
 <form action="">
@@ -34,6 +35,7 @@ List Todos
     <p> {{todo}}</p>
     {% endif %}
 
+    <h2>Created by: {{todo.created_by.username}}</h2>
     <a class="btn btn-warning" href="{% url 'edit_todo' todo.id %}"><i class="fa-solid fa-pen-to-square"></i>EDIT</a>
     <a class="btn btn-danger" href="{% url 'delete_todo' todo.id %}"><i class="fa-solid fa-trash "></i>DELETE</a>
 

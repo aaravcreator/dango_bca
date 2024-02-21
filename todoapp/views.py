@@ -1,6 +1,13 @@
 from django.shortcuts import render,HttpResponse,redirect
 from .models import Todo
 from .forms import TodoForm,TodoSearchForm
+
+from django.contrib.auth.decorators import login_required
+
+
+
+def loginPage(reqeust):
+    return HttpResponse("LOGIN PAGE")
 # Create your views here.
 def todo_index(request):
     return HttpResponse("THIS IS TODO INDEX")
@@ -23,14 +30,22 @@ def list_todo(request):
     }
     return render(request,'todoapp/list.html',context)
 
-
+# @login_required(login_url="loginPage")
+## if reqeust.user.is_authenticated()
 def create_todo(request):
+    if not request.user.is_authenticated:
+        return redirect('loginPage')
     form = TodoForm()
     if request.method == "POST":
+        print(request.POST)
         form = TodoForm(request.POST)
         if form.is_valid():
             # from save and create object
-            form.save() # creates Todo in the database
+            form_object = form.save(commit=False)
+            form_object.created_by = request.user
+            form_object.save()#creates Todo in the database
+            
+
             return redirect('list_todo')
 
     context = {
@@ -39,6 +54,8 @@ def create_todo(request):
     }
     return render(request,'todoapp/create.html',context)
 
+
+login_required()
 def edit_todo(request,id):
     todo = Todo.objects.get(id=id)
     
