@@ -79,6 +79,7 @@ def register(request):
     if request.method == "POST":
         username = request.POST.get('username')
         full_name = request.POST.get('full_name')
+        
         # object created and inserted to database
         
         if (username is not None and username != "" ):

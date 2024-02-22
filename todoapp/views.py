@@ -1,24 +1,47 @@
 from django.shortcuts import render,HttpResponse,redirect
 from .models import Todo
 from .forms import TodoForm,TodoSearchForm
-
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth import login,authenticate,logout
 
 
-def loginPage(reqeust):
-    return HttpResponse("LOGIN PAGE")
+def loginPage(request):
+    error = None
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('list_todo')
+        error = "Username or Password Error"
+    context = {
+        'error':error,
+    }  
+
+    return render(request,'login.html',context)
+
+def logoutPage(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('loginPage') 
+    
 # Create your views here.
 def todo_index(request):
     return HttpResponse("THIS IS TODO INDEX")
 
 def list_todo(request):
+    if not request.user.is_authenticated:
+        return redirect('loginPage')
+    
     todo_search_form = TodoSearchForm()
     keyword = request.GET.get('title')
     if keyword is not None and keyword != "":
         todos = Todo.objects.filter(title__exact = keyword)
     else:
         todos = Todo.objects.all()
+    todos = todos.filter(created_by = request.user)
     completed_todos_count = Todo.objects.filter(completed_status=True).count()
     incomplete_todos_count = Todo.objects.filter(completed_status=False).count()
     print(todos)

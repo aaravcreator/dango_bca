@@ -3,6 +3,7 @@ from todoapp.views import *
 
 urlpatterns = [
     path('login/',loginPage,name="loginPage"),
+    path('logout/',logoutPage,name="logoutPage"),
     path('',todo_index),
     path('list/',list_todo,name="list_todo"),
     path('create/',create_todo,name='create_todo'),

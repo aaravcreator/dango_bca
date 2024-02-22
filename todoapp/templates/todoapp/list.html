@@ -7,21 +7,12 @@ List Todos
 
 {% block content %}
 
-<h2>HELLO, {{request.user}}</h2>
+
+
 <a class="btn btn-primary" href="{% url 'create_todo' %}"><i class="fa-solid fa-plus"></i> Add TODO </a>
 <h1>LIST OF TODOS</h1>
-<form action="">
 
-    {{todo_search_form}}
 
-    <button type="submit">Search</button>
-</form>
-
-<!-- <form action="" >
-    <label for="keyword">Search</label>
-    <input id="keyword" type="text" name="keyword" placeholder="Enter keyword to search..">
-    <button type="submit">Search</button>
-</form> -->
 
 <p>COMPLETED: <strong>{{completed_todos_count}}</strong></p>
 <p>INCOMPLETE: <strong>{{incomplete_todos_count}}</strong></p>
