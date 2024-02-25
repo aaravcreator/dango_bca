@@ -1,9 +1,18 @@
-<h1>Delete {{todo.title}} ?</h1>
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <h1>Delete {{todo.title}} ?</h1>
 
 <form action="" method="POST">
     {% csrf_token %}
 
 
 
-    <button type="submit">Delete Todo</button>
+    <button type="submit" class="btn btn-danger">Delete Todo</button>
 </form>
+</div>
+
+{% endblock %}

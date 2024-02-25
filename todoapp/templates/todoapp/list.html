@@ -18,8 +18,15 @@ List Todos
 <p>INCOMPLETE: <strong>{{incomplete_todos_count}}</strong></p>
 <p>TOTAL: <strong>{{todo_list.count}}</strong></p>
 {% for todo in todo_list %}
-
+    {% if todo.photo %}
+    <p>PHOTO</p>
+    <img src="{{todo.photo.url}}" alt="" class="img-fluid" style="height: 100px; width: 100px;">
+    {% else %}
+    <img src="#" alt="">
+    {% endif %}
     <p>ID: {{todo.id}}</p>
+    <p>Created at {{todo.created_at}}</p>
+    <p>Updated at {{todo.updated_at}}</p>
     {% if todo.completed_status %}
    <p> <strike>{{todo}}</strike></p>
     {% else %}

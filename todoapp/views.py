@@ -4,7 +4,7 @@ from .forms import TodoForm,TodoSearchForm
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import login,authenticate,logout
-
+from django.contrib import messages
 
 def loginPage(request):
     error = None
@@ -41,7 +41,7 @@ def list_todo(request):
         todos = Todo.objects.filter(title__exact = keyword)
     else:
         todos = Todo.objects.all()
-    todos = todos.filter(created_by = request.user)
+    todos = todos.filter(created_by = request.user).order_by('-updated_at')
     completed_todos_count = Todo.objects.filter(completed_status=True).count()
     incomplete_todos_count = Todo.objects.filter(completed_status=False).count()
     print(todos)
@@ -61,13 +61,13 @@ def create_todo(request):
     form = TodoForm()
     if request.method == "POST":
         print(request.POST)
-        form = TodoForm(request.POST)
+        form = TodoForm(request.POST,request.FILES)
         if form.is_valid():
             # from save and create object
             form_object = form.save(commit=False)
             form_object.created_by = request.user
             form_object.save()#creates Todo in the database
-            
+            messages.success(request,"TODO CREATED !")
 
             return redirect('list_todo')
 
@@ -87,6 +87,7 @@ def edit_todo(request,id):
         form = TodoForm(request.POST,instance=todo)
         if form.is_valid():
             form.save()
+            messages.success(request,"TODO EDITED !")
             return redirect('list_todo')
     context = {
         'todo':todo,
@@ -104,6 +105,7 @@ def delete_todo(request,id):
    
     if request.method == 'POST':
         todo.delete()
+        messages.success(request,"TODO DELTED !")
         return redirect('list_todo')
     context = {
     'todo':todo
