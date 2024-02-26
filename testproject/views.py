@@ -1,8 +1,9 @@
 from django.shortcuts import HttpResponse,render
 import random 
 from django.contrib.auth.models import User
-
+from blog.models import Blog
 def index(request):
+    blogs = Blog.objects.all()
     person_list = ["HARI","RAM",'SHYAM',"NIRMAL","GITA"]
 
     users = User.objects.all()
@@ -28,7 +29,8 @@ def index(request):
         'users':users,
         'data':"HELLO",
         'person_list':person_list,
-        'next_person_list':next_person_list
+        'next_person_list':next_person_list,
+        'blog_list':blogs
     }
     return render(request,'base_template.html',context)
 
