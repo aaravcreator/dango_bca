@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'todoapp',
     'crispy_forms',
     "crispy_bootstrap5",
+    'blog'
     
 ]
 

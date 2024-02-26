@@ -30,7 +30,7 @@ def index(request):
         'person_list':person_list,
         'next_person_list':next_person_list
     }
-    return render(request,'index.html',context)
+    return render(request,'base_template.html',context)
 
 def test(request):
     return HttpResponse("THIS IS TEST")

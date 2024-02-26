@@ -84,7 +84,7 @@ def edit_todo(request,id):
     
     form = TodoForm(instance=todo)
     if request.method == 'POST':
-        form = TodoForm(request.POST,instance=todo)
+        form = TodoForm(request.POST,request.FILES,instance=todo)
         if form.is_valid():
             form.save()
             messages.success(request,"TODO EDITED !")
