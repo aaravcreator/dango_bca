@@ -28,6 +28,7 @@ from .views import *
 urlpatterns = [
     path("",index),
     path("todo/",include('todoapp.urls')),
+    path("blog/",include('blog.urls')),
     path('admin/', admin.site.urls),
     path("test/",test),
     path("getprofile/<str:username>/",view_profile),
